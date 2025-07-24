@@ -7,7 +7,8 @@ module load miniconda3 || { echo "Error: Failed to load miniconda3 module."; exi
 
 echo "Miniconda3 module loaded successfully."
 
-USERNAME=$(grep -oP '"username"\s*:\s*"\K[^"]+' config.json)
+MODULE_DIR="$PWD/PL-GRID-SETUP"
+USERNAME=$(grep -oP '"username"\s*:\s*"\K[^"]+' $MODULE_DIR/config.json)
 
 # Check if MEMFS variable is set
 if [ -z "$MEMFS" ]; then

@@ -8,6 +8,8 @@ CYAN='\033[1;36m'
 RESET='\033[0m'
 BOLD='\033[1m'
 
+MODULE_DIR="PL-GRID-SETUP"
+
 log_info() {
     echo -e "${CYAN}[INFO]${RESET} $1"
 }
@@ -26,8 +28,8 @@ log_error_exit() {
 }
 
 log_info "Making setup scripts executable..."
-chmod +x .setup_conda.sh || log_error_exit "Failed to make setup_conda.sh executable."
-chmod +x .setup_ares.sh || log_error_exit "Failed to make setup_ares.sh executable."
+chmod +x $MODULE_DIR/.setup_conda.sh || log_error_exit "Failed to make setup_conda.sh executable."
+chmod +x $MODULE_DIR/.setup_ares.sh || log_error_exit "Failed to make setup_ares.sh executable."
 log_success "Setup scripts are now executable."
 
 project_dir="$PWD"
@@ -35,14 +37,14 @@ vscode_dir="$project_dir/.vscode"
 tasks_file="$vscode_dir/tasks.json"
 env_file="$project_dir/environment.yml"
 
-if find config.json -type f -print -quit | grep -q .; then
+if find $MODULE_DIR/config.json -type f -print -quit | grep -q .; then
     log_success "config.json file found."
 else
     log_error_exit "config.json file not found. Please create it before running the script."
 fi
 
 log_info "Extracting username from config.json..."
-USERNAME=$(grep -oP '"username"\s*:\s*"\K[^"]+' config.json)
+USERNAME=$(grep -oP '"username"\s*:\s*"\K[^"]+' $MODULE_DIR/config.json)
 log_success "Username extracted: $USERNAME"
 
 if [[ -f "$env_file" ]]; then
@@ -68,7 +70,7 @@ dependencies:
 fi
 
 log_info "Running Conda setup script..."
-./.setup_conda.sh || log_error_exit "Failed to set up Conda environment."
+./$MODULE_DIR/.setup_conda.sh || log_error_exit "Failed to set up Conda environment."
 log_success "Conda environment set up successfully."
 
 if [[ -f "$tasks_file" ]]; then
@@ -85,9 +87,9 @@ else
         {
             "label": "Install python env",
             "type": "shell",
-            "command": "bash \"\${workspaceFolder}/.setup_ares.sh\"",
+            "command": "bash \"\${workspaceFolder}/PL-GRID-SETUP/.setup_ares.sh\"",
             "windows": {
-                "command": "bash \"\${workspaceFolder}/.setup_ares.sh\""
+                "command": "bash \"\${workspaceFolder}/PL-GRID-SETUP/.setup_ares.sh\""
             },
             "presentation": {
                 "echo": true,
@@ -106,5 +108,5 @@ EOF
 fi
 
 log_info "Running ARES setup script..."
-./.setup_ares.sh || log_error_exit "Failed to set up environment."
+./$MODULE_DIR/.setup_ares.sh || log_error_exit "Failed to set up environment."
 log_success "environment set up successfully."

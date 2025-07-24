@@ -7,6 +7,8 @@ CYAN='\033[1;36m'
 BOLD='\033[1m'
 RESET='\033[0m'
 
+MODULE_DIR="$PWD/PL-GRID-SETUP"
+
 log_info() {
     echo -e "${CYAN}[INFO]${RESET} $1"
 }
@@ -29,8 +31,8 @@ module load miniconda3 || log_error_exit "Failed to load miniconda3 module."
 log_success "Miniconda3 module loaded successfully."
 
 log_info "Parsing config.json..."
-USERNAME=$(grep -oP '"username"\s*:\s*"\K[^"]+' config.json)
-GROUPNAME_PATH=$(grep -oP '"groupname"\s*:\s*"\K[^"]+' config.json)
+USERNAME=$(grep -oP '"username"\s*:\s*"\K[^"]+' $MODULE_DIR/config.json)
+GROUPNAME_PATH=$(grep -oP '"groupname"\s*:\s*"\K[^"]+' $MODULE_DIR/config.json)
 
 if [ -n "$MEMFS" ]; then
     log_info "MEMFS is set to: $MEMFS"
@@ -90,23 +92,6 @@ if [ -n "$MEMFS" ]; then
 
 else
     log_error_exit "MEMFS is not set. Please set MEMFS before running the script."
-fi
-
-# ---------------------------------------------------
-# VSCode / Jupyter / IPython / Cache relinking
-
-log_info "Relocating user directories to MEMFS and creating symlinks..."
-
-if [ -d $HOME/.vscode-server ]; then
-    mv $HOME/.vscode-server $MEMFS/.vscode-server
-    ln -sfn $MEMFS/.vscode-server $HOME/.vscode-server
-    log_success ".vscode-server relocated and linked."
-fi
-
-if [ -d $HOME/.cache ]; then
-    mv $HOME/.cache $MEMFS/.cache
-    ln -sfn $MEMFS/.cache $HOME/.cache
-    log_success ".cache relocated and linked."
 fi
 
 # ---------------------------------------------------
