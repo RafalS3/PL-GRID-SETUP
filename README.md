@@ -4,7 +4,7 @@ Automated setup scripts to install and configure Conda environments on PL-GRID H
 
 ## Overview
 
-This repository provides a set of shell scripts to quickly set up and configure Miniconda and Conda environments tailored for PL-GRID HPC clusters. The scripts automate the environment setup process to save time and ensure consistency when running workflows on clusters like ARES. It also installs some defalut packages like python, jupyiter etc.
+This repository provides a set of shell scripts to quickly set up and configure Miniconda and Conda environments tailored for PL-GRID HPC clusters. It also installs some helpful packages like python, pip etc.
 
 ## Usage
 
