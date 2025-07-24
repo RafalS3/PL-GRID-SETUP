@@ -8,7 +8,7 @@ This repository provides a set of shell scripts to quickly set up and configure 
 
 ## Usage
 
-1. **Clone the repository and start the script:**
+1. **Clone the repository:**
 
    ```bash
    git clone https://github.com/RafalS3/PL-GRID-SETUP.git
