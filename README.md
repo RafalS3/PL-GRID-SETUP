@@ -13,6 +13,9 @@ This repository provides a set of shell scripts to quickly set up and configure 
    ```bash
    git clone https://github.com/RafalS3/PL-GRID-SETUP.git
    cd PL-GRID-SETUP
+   ```
+2. **Change username and group in config.json then**
+   ```bash
    ./setup_pl_grid.sh
    ```
    
