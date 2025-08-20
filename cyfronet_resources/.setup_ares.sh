@@ -7,7 +7,8 @@ CYAN='\033[1;36m'
 BOLD='\033[1m'
 RESET='\033[0m'
 
-MODULE_DIR="$PWD/PL-GRID-SETUP"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+MODULE_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 
 log_info() {
     echo -e "${CYAN}[INFO]${RESET} $1"
@@ -31,26 +32,63 @@ module load miniconda3 || log_error_exit "Failed to load miniconda3 module."
 log_success "Miniconda3 module loaded successfully."
 
 log_info "Parsing config.json..."
-USERNAME=$(grep -oP '"username"\s*:\s*"\K[^"]+' $MODULE_DIR/config.json)
-GROUPNAME_PATH=$(grep -oP '"groupname"\s*:\s*"\K[^"]+' $MODULE_DIR/config.json)
+
+
+
+
+
+usage() {
+    echo -e "${BOLD}Usage:${RESET} $0 --username <username>"
+    echo "  --username <username>   (required, must be last)"
+    echo "  -h, --help              Show this help message"
+    exit 1
+}
+
+
+USERNAME=""
+
+# Parse command line arguments
+
+while [[ $# -gt 0 ]]; do
+    key="$1"
+    case $key in
+        --username)
+            USERNAME="$2"
+            shift; shift
+            ;;
+        -h|--help)
+            usage
+            ;;
+        *)
+            log_error_exit "Unknown argument: $1"
+            ;;
+    esac
+done
+
+# Check required
+if [[ -z "$USERNAME" ]]; then
+    log_error_exit "Username is required. Use -u <username>."
+fi
+
+# Check PLG_GROUPS_STORAGE
+if [ -z "$PLG_GROUPS_STORAGE" ]; then
+    log_error_exit "PLG_GROUPS_STORAGE is not set. Please set PLG_GROUPS_STORAGE before running the script."
+fi
 
 if [ -n "$MEMFS" ]; then
     log_info "MEMFS is set to: $MEMFS"
 
+
     HOME_SRC_PATH="$HOME/$USERNAME.sqsh"
-    GROUP_SRC_PATH="$PLG_GROUPS_STORAGE/$GROUPNAME_PATH/$USERNAME.sqsh"
     DEST_PATH="$MEMFS/$USERNAME.sqsh"
     ENV_PATH="$MEMFS/envs/$USERNAME"
 
-    if [ -f "$HOME_SRC_PATH" ]; then
-        log_success "Found $USERNAME.sqsh in HOME directory: $HOME_SRC_PATH"
-        SRC_PATH="$HOME_SRC_PATH"
-    elif [ -f "$GROUP_SRC_PATH" ]; then
-        log_warn "$USERNAME.sqsh not found in HOME directory. Using group storage path: $GROUP_SRC_PATH"
-        SRC_PATH="$GROUP_SRC_PATH"
-    else
-        log_error_exit "$USERNAME.sqsh not found in either HOME directory or group storage."
-    fi
+        if [ -f "$HOME_SRC_PATH" ]; then
+            log_success "Found $USERNAME.sqsh in HOME directory: $HOME_SRC_PATH"
+            SRC_PATH="$HOME_SRC_PATH"
+        else
+            log_error_exit "$USERNAME.sqsh not found in HOME directory."
+        fi
 
     if mountpoint -q "$ENV_PATH"; then
         log_warn "Squashfs already mounted at $ENV_PATH. Unmounting..."

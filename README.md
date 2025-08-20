@@ -1,10 +1,10 @@
 # PL-GRID-SETUP
 
-Automated setup scripts to install and configure Conda environments on PL-GRID HPC clusters.
+Automated setup scripts to install and configure Conda or venv Python environments on PL-GRID HPC clusters (Ares or Athena).
 
 ## Overview
 
-This repository provides a set of shell scripts to quickly set up and configure Miniconda and Conda environments tailored for PL-GRID HPC clusters. It also installs helpful packages like Python, pip, and more.
+This repository provides a set of shell scripts to quickly set up and configure Python environments (using either Conda or venv) tailored for PL-GRID HPC clusters. It supports both Ares and Athena units, and can install helpful packages like Python, pip, and more. The setup is fully configurable via a `config.json` file.
 
 ## Usage
 
@@ -21,12 +21,52 @@ cd your-project
 git submodule add https://github.com/RafalS3/PL-GRID-SETUP.git
 git submodule update --init --recursive
 ```
-### 2. Configure and run the set up
 
-``` bash
-# Edit the config file to set your PL-GRID username and group
-nano config.json
+### 2. Configure and run the setup
 
-# Run the setup script
-./PL-GRID-SETUP/setup_pl_grid.sh
+
+## Quickstart: Choose your setup
+
+Replace `your_plgrid_username` with your actual PL-GRID username. You can copy and paste the command for your desired environment and cluster:
+
+**Ares + Conda:**
+```bash
+./PL-GRID-SETUP/setup_pl_grid.sh --environment conda --computer_unit ares --username your_plgrid_username
 ```
+
+**Ares + venv:**
+```bash
+./PL-GRID-SETUP/setup_pl_grid.sh --environment venv --computer_unit ares --username your_plgrid_username
+```
+
+**Athena + Conda: (resolving conda environment with Pytorch or simillar could take really, really long time)**
+```bash
+./PL-GRID-SETUP/setup_pl_grid.sh --environment conda --computer_unit athena --username your_plgrid_username
+```
+
+**Athena + venv:**
+```bash
+./PL-GRID-SETUP/setup_pl_grid.sh --environment venv --computer_unit athena --username your_plgrid_username
+```
+
+This will:
+- Choose the correct resource script for Ares or Athena
+- Choose the correct environment setup (Conda or venv)
+- Create or update `environment.yml` as needed
+- Generate a VSCode `tasks.json` for your selected cluster
+
+## Troubleshooting & Requirements
+
+- Ensure you have `MEMFS` set to a writable directory in memory (e.g., `/tmp/$USER-memfs`).
+- Ensure your project contains the correct environment file (required for custom environments; if missing, an empty venv will be created):
+  - For **conda**: `environment.yml`,
+  - For **venv**: `requirements.txt`.
+
+## Configuration options (for setup_pl_grid.sh only)
+
+- `--username <username>`: Your PL-GRID username (required, must be last flag)
+- `--environment <conda|venv>`: Choose your preferred Python environment manager (default: venv)
+- `--computer_unit <ares|athena>`: Choose the target cluster (default: ares)
+
+---
+For more details, see the comments in each script.

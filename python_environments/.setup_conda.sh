@@ -7,8 +7,44 @@ module load miniconda3 || { echo "Error: Failed to load miniconda3 module."; exi
 
 echo "Miniconda3 module loaded successfully."
 
-MODULE_DIR="$PWD/PL-GRID-SETUP"
-USERNAME=$(grep -oP '"username"\s*:\s*"\K[^"]+' $MODULE_DIR/config.json)
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+MODULE_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+
+
+
+
+usage() {
+    echo "Usage: $0 --username <username>"
+    echo "  --username <username>   (required, must be last)"
+    echo "  -h, --help              Show this help message"
+    exit 1
+}
+
+
+USERNAME=""
+
+# Parse command line arguments
+
+while [[ $# -gt 0 ]]; do
+    key="$1"
+    case $key in
+        --username)
+            USERNAME="$2"
+            shift; shift
+            ;;
+        -h|--help)
+            usage
+            ;;
+        *)
+            echo "Unknown argument: $1"; usage
+            ;;
+    esac
+done
+
+# Check required
+if [[ -z "$USERNAME" ]]; then
+    echo "Username is required. Use -u <username>."; exit 1
+fi
 
 # Check if MEMFS variable is set
 if [ -z "$MEMFS" ]; then
