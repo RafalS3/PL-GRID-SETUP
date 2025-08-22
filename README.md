@@ -39,7 +39,7 @@ Replace `your_plgrid_username` with your actual PL-GRID username. You can copy a
 ./PL-GRID-SETUP/setup_pl_grid.sh --environment venv --computer_unit ares --username <your_plgrid_username>
 ```
 
-**Athena + Conda: (resolving conda environment with Pytorch or simillar could take really, really long time)**
+**Athena + Conda: (resolving Conda environment with PyTorch or simillar could take really, really long time)**
 ```bash
 ./PL-GRID-SETUP/setup_pl_grid.sh --environment conda --computer_unit athena --username <your_plgrid_username>
 ```
