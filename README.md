@@ -4,7 +4,7 @@ Automated setup scripts to install and configure Conda or venv Python environmen
 
 ## Overview
 
-This repository provides a set of shell scripts to quickly set up and configure Python environments (using either Conda or venv) tailored for PL-GRID HPC clusters. It supports both Ares and Athena units, and can install helpful packages like Python, pip, and more. The setup is fully configurable via a `config.json` file.
+This repository provides a set of shell scripts to quickly set up and configure Python environments (using either Conda or venv) tailored for PL-GRID HPC clusters. It supports both Ares and Athena units, and can install helpful packages like Python, pip, and more.
 
 ## Usage
 
@@ -57,7 +57,7 @@ This will:
 
 ## Troubleshooting & Requirements
 
-- Ensure you have `MEMFS` set to a writable directory in memory (e.g., `/tmp/$USER-memfs`).
+- Ensure you have `MEMFS` set to a writable directory in memory.
 - Ensure your project contains the correct environment file (required for custom environments; if missing, an empty venv will be created):
   - For **conda**: `environment.yml`,
   - For **venv**: `requirements.txt`.
