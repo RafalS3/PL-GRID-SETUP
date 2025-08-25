@@ -1,8 +1,8 @@
 <p align="center">
   <img src="https://github.com/user-attachments/assets/aca97635-c3ce-4e95-8535-92a65a7ef0eb" alt="HPC Logo" width="400" />
 </p>
-<br> Rafał Sawczyszyn, Mateusz Wójcik </br>
-# PL-GRID-SETUP
+
+# easyHPC!
 
 Automated setup scripts to install and configure Conda or venv Python environments on PL-GRID HPC clusters (Ares or Athena).
 
