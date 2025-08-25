@@ -1,5 +1,6 @@
-
-<img width="650" height="350" alt="hpcLogo" src="https://github.com/user-attachments/assets/aca97635-c3ce-4e95-8535-92a65a7ef0eb" />
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/aca97635-c3ce-4e95-8535-92a65a7ef0eb" alt="HPC Logo" width="400" />
+</p>
 
 # PL-GRID-SETUP
 
