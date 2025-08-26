@@ -9,9 +9,9 @@ This repository provides a set of shell scripts to quickly set up and configure 
 
 ## Usage
 
-### 1. Clone your main repository and initialize `PL-GRID-SETUP` as a submodule
+### 1. Clone your main repository and initialize `easyHPC` as a submodule
 
-If your project doesn't already include `PL-GRID-SETUP` as a submodule, you can do the following:
+If your project doesn't already include `easyHPC` as a submodule, you can do the following:
 
 ```bash
 # Clone your main repository with submodules
