@@ -32,22 +32,22 @@ Replace `your_plgrid_username` with your actual PL-GRID username. You can copy a
 
 **Ares + Conda:**
 ```bash
-./PL-GRID-SETUP/setup_pl_grid.sh --environment conda --computer_unit ares --username <your_plgrid_username>
+./easyHPC/setup_pl_grid.sh --environment conda --computer_unit ares --username <your_plgrid_username>
 ```
 
 **Ares + venv:**
 ```bash
-./PL-GRID-SETUP/setup_pl_grid.sh --environment venv --computer_unit ares --username <your_plgrid_username>
+./easyHPC/setup_pl_grid.sh --environment venv --computer_unit ares --username <your_plgrid_username>
 ```
 
 **Athena + Conda: (resolving Conda environment with PyTorch or simillar could take really, really long time)**
 ```bash
-./PL-GRID-SETUP/setup_pl_grid.sh --environment conda --computer_unit athena --username <your_plgrid_username>
+./easyHPC/setup_pl_grid.sh --environment conda --computer_unit athena --username <your_plgrid_username>
 ```
 
 **Athena + venv:**
 ```bash
-./PL-GRID-SETUP/setup_pl_grid.sh --environment venv --computer_unit athena --username <your_plgrid_username>
+./easyHPC/setup_pl_grid.sh --environment venv --computer_unit athena --username <your_plgrid_username>
 ```
 
 This will:
