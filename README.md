@@ -18,8 +18,8 @@ If your project doesn't already include `PL-GRID-SETUP` as a submodule, you can 
 git clone --recurse-submodules https://github.com/yourusername/your-project.git
 cd your-project
 
-# (Optional) If PL-GRID-SETUP is not yet a submodule, add it
-git submodule add https://github.com/RafalS3/PL-GRID-SETUP.git
+# (Optional) If easyHPC is not yet a submodule, add it
+git submodule add https://github.com/RafalS3/easyHPC.git
 git submodule update --init --recursive
 ```
 
