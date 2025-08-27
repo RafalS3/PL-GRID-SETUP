@@ -8,7 +8,7 @@ CYAN='\033[1;36m'
 RESET='\033[0m'
 BOLD='\033[1m'
 
-MODULE_DIR="PL-GRID-SETUP"
+MODULE_DIR="easyHPC"
 RESOURCE_DIR="$MODULE_DIR/cyfronet_resources"
 ENV_DIR="$MODULE_DIR/python_environments"
 
@@ -154,9 +154,9 @@ else
         {
             "label": "Install python env",
             "type": "shell",
-            "command": "bash \"\${workspaceFolder}/PL-GRID-SETUP/$RESOURCE_SCRIPT\" --username $USERNAME",
+            "command": "bash \"\${workspaceFolder}/easyHPC/$RESOURCE_SCRIPT\" --username $USERNAME",
             "windows": {
-                "command": "bash \"\${workspaceFolder}/PL-GRID-SETUP/$RESOURCE_SCRIPT\" --username $USERNAME"
+                "command": "bash \"\${workspaceFolder}/easyHPC/$RESOURCE_SCRIPT\" --username $USERNAME"
             },
             "presentation": {
                 "echo": true,
