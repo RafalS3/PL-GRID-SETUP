@@ -5,7 +5,7 @@
 # easyHPC!
 ## Overview
 
-This repository provides a set of shell scripts to quickly set up and configure Python environments (using either Conda or venv) tailored for PL-GRID HPC clusters. It supports both Ares and Athena units, and can install helpful packages like Python, pip, and more.
+This repository provides a set of shell scripts to quickly set up and configure Python environments (using either Conda or venv) tailored for Cyfronet AGH HPC clusters. It supports both Ares and Athena units, and can install helpful packages like Python, pip, and more.
 
 ## Usage
 
